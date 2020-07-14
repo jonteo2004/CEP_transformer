@@ -6,7 +6,7 @@ from dataset import get_dataset, preprocess_sentence
 
 tf.random.set_seed(1234)
 
-
+# Custom Learning Schedule
 class CustomSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
 
     def __init__(self, hparams, warmup_steps=4000):
@@ -48,7 +48,7 @@ def inference(hparams, model, tokenizer, sentence):
 
     return tf.squeeze(output, axis=0)
 
-
+# prediction (chatbot output)
 def predict(hparams, model, tokenizer, sentence):
     prediction = inference(hparams, model, tokenizer, sentence)
 
@@ -57,7 +57,7 @@ def predict(hparams, model, tokenizer, sentence):
 
     return predicted_sentence
 
-
+# predict + user input
 def evaluate(hparams, model, tokenizer):
     print('\nEvaluate')
     i = 4
@@ -113,6 +113,8 @@ def main(hparams):
     # model.save('path_to_my_model', save_format='tf')
     evaluate(hparams, model, tokenizer)
 
+# Hparams streamlines giving variables to all the functions and classes in the code
+# I can call a variable by calling hparams.<variable> so I dont have to list them at every function
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
